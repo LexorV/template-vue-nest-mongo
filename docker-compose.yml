@@ -1,0 +1,31 @@
+---
+services:
+  backend:
+    container_name: "project-backend"
+    depends_on:
+      - mongodb
+    build: ./backend
+    #image: lexv/tech-and-dev-backend
+    env_file:
+      - ./.env
+    ports:
+      - '3000:3000'
+    restart: on-failure
+    volumes:
+      - data-files:/app/dist/static   
+  mongodb:
+    container_name: "mongodb"
+    env_file:
+      - ./.env
+    image: mongo:8.0
+    ports:
+      - '27017:27017'
+    restart: on-failure
+    volumes:
+      - /root/data/mongod:/root/data
+      - /root/logs/mongod:/root/logs
+      - ./mongod.conf:/etc/mongod.conf
+volumes:
+    data:
+    data-files:    
+version: '3.9'
