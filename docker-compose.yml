@@ -1,10 +1,10 @@
 version: '3.8'
 
 services:
-  app:
+  backend:
     build:
       context: ./backend
-    container_name: nestjs_app
+    container_name: nestjs_backend
     ports:
       - '3000:3000'
     depends_on:
@@ -25,6 +25,15 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
     volumes:
       - mongo_data:/data/db
-
+  frontend:
+    container_name: "frontend"
+    build: ./frontend
+    ports: 
+    - "3020:80"
+    tty: true
+    stdin_open: true
+    restart: on-failure
+    depends_on: 
+     - backend
 volumes:
   mongo_data:
