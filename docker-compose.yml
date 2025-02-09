@@ -4,6 +4,7 @@ services:
   backend:
     build:
       context: ./backend
+     # image: ${{ secrets.BACKEND_IMAGE_NAME }}/backend:latest
     container_name: nestjs_backend
     ports:
       - '3000:3000'
@@ -27,6 +28,7 @@ services:
       - mongo_data:/data/db
   frontend:
     container_name: "frontend"
+    #image: ${{ secrets.FRONTEND_IMAGE_NAME }}/frontend:latest
     build: ./frontend
     ports: 
     - "3020:80"
