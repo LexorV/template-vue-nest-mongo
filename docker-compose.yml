@@ -5,7 +5,7 @@ services:
     build:
       context: ./backend
      # image: ${{ secrets.BACKEND_IMAGE_NAME }}/backend:latest
-    container_name: nestjs_backend
+    container_name: ${NAME_BACKEND}
     ports:
       - '3000:3000'
     depends_on:
@@ -18,7 +18,7 @@ services:
 
   mongo:
     image: mongo:4.4
-    container_name: mongo_db
+    container_name: ${NAME_BASE}
     ports:
       - '27022:27017'
     environment:
@@ -27,7 +27,7 @@ services:
     volumes:
       - mongo_data:/data/db
   frontend:
-    container_name: "frontend"
+    container_name: ${NAME_FRONTEND}
     #image: ${{ secrets.FRONTEND_IMAGE_NAME }}/frontend:latest
     build: ./frontend
     ports: 

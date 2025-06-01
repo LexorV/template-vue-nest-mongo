@@ -6,6 +6,7 @@
       :todos="todos"
       :meta="meta"
     ></example-component>
+    <q-btn @click="getUsers">Get Users</q-btn>
   </q-page>
 </template>
 
@@ -13,6 +14,12 @@
 import { ref } from 'vue';
 import type { Todo, Meta } from 'components/models';
 import ExampleComponent from 'components/ExampleComponent.vue';
+import { api } from 'boot/axios';
+
+const getUsers = async () => {
+  const response = await api.get('users');
+  console.log(response.data);
+};
 
 const todos = ref<Todo[]>([
   {
