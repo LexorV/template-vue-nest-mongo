@@ -15,10 +15,12 @@ RUN yarn global add @quasar/cli
 RUN rm -f package-lock.json
 
 # Устанавливаем зависимости через yarn
-RUN yarn install
+ENV NODE_ENV=production
+RUN yarn install --production=false
+
 
 # Собираем приложение
-RUN yarn quasar build
+RUN yarn build
 
 # Этап production
 FROM nginx:1.23.1-alpine as production
